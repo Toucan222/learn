@@ -1,9 +1,11 @@
+'use client';
+
 import { useState } from 'react'
 import { Package } from './types'
 import PaymentForm from './PaymentForm'
 
 interface PackageFormProps {
-  onPurchase: (pkg: Partial<Package>) => void
+  onPurchase: (pkg: Partial<Package>) => void;
 }
 
 export default function PackageForm({ onPurchase }: PackageFormProps) {
@@ -21,6 +23,8 @@ export default function PackageForm({ onPurchase }: PackageFormProps) {
       unused: packageDetails.purchased,
       scheduled: 0,
       unscheduled: packageDetails.purchased,
+      overscheduled: 0,
+      overused: 0
     })
   }
 

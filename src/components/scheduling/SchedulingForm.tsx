@@ -1,19 +1,21 @@
-import { useState } from 'react'
-import { SchedulingRequest, LessonType } from './types'
-import { schedulingEngine } from './SchedulingEngine'
+'use client';
+
+import { useState } from 'react';
+import { SchedulingRequest, LessonType } from './types';
+import { schedulingEngine } from './SchedulingEngine';
 
 export default function SchedulingForm() {
   const [request, setRequest] = useState<Partial<SchedulingRequest>>({
     lessonType: 'group',
     studentCount: 1,
     duration: 60,
-  })
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    const suggestions = await schedulingEngine.findAvailableSlots(request as SchedulingRequest)
+    e.preventDefault();
+    const suggestions = await schedulingEngine.findAvailableSlots(request as SchedulingRequest);
     // Handle suggestions
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -32,18 +34,6 @@ export default function SchedulingForm() {
             <option value="trial">Trial</option>
             <option value="ongoing">Ongoing</option>
           </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Subject
-          </label>
-          <input
-            type="text"
-            value={request.subject || ''}
-            onChange={(e) => setRequest({ ...request, subject: e.target.value })}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
-          />
         </div>
 
         <div>
@@ -81,5 +71,5 @@ export default function SchedulingForm() {
         Find Available Slots
       </button>
     </form>
-  )
+  );
 }
